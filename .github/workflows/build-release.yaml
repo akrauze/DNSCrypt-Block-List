@@ -21,6 +21,7 @@ jobs:
           awk -i inplace '!seen[$0]++' DNSCrypt-IPv4.txt
           awk -i inplace '!seen[$0]++' DNSCrypt-Names.txt
           awk -i inplace '!seen[$0]++' DNSCrypt-All.txt
+          curl -s https://raw.githubusercontent.com/olbat/ut1-blacklists/refs/heads/master/blacklists/adult/domains.gz | gunzip | xargs -I{} dig +short {} | grep -E '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$' > ips.txt ; sort -u -o ips.txt ips.txt
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add --all
